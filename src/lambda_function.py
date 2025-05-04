@@ -4,5 +4,5 @@ def lambda_handler(event, context):
     # TODO implement
     return {
         'statusCode': 200,
-        'body': json.dumps('Hello from Lambda! From Git Hub Action.. uodated the commit')
+        'body': json.dumps('Hello from Lambda! From Git Hub Action.. uodated the commit updated the code')
     }
