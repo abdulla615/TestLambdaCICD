@@ -1,10 +1,12 @@
+
+
 def lambda_handler(event, context):
     print('*********** The event is: ***************')
     print(event)
 
     token = event.get('authorizationToken')
 
-    if token == 'abc123':
+    if token == 'automark123':
         effect = 'Allow'
     else:
         effect = 'Deny'
@@ -15,7 +17,7 @@ def lambda_handler(event, context):
     resource_arn = arn_parts[0] + '/' + arn_parts[1] + '/*/*'
 
     authResponse = {
-        "principalId": "abc123",
+        "principalId": "automark123",
         "policyDocument": {
             "Version": "2012-10-17",
             "Statement": [{
