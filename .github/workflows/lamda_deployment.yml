@@ -6,6 +6,7 @@ on:
     paths:
       - 'src/**'
       - 'Auth/**'
+      - 'newTest/**'
 
 jobs:
   deploy:
@@ -49,6 +50,25 @@ jobs:
           args: >
             lambda update-function-code
             --function-name arn:aws:lambda:ap-south-1:124030975021:function:DemoAuthorizer
+            --zip-file fileb://auth_code.zip
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: "ap-south-1"
+
+        # ------------------- Deploy new Test Lambda -------------------
+      - name: Zip newTest lambda
+        run: |
+          cd newTest
+          zip -r ../newtest_code.zip .
+          cd ..
+
+      - name: Deploy newTest2 (newTest)
+        uses: imehedi/actions-awscli-v2@latest
+        with:
+          args: >
+            lambda update-function-code
+            --function-name arn:aws:lambda:ap-south-1:124030975021:function:newTest2
             --zip-file fileb://auth_code.zip
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
